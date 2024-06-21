@@ -1,0 +1,61 @@
+{
+    "biuld_flags":{
+        "exec_path" : "D:\\env\\env-windows-1.4.1\\tools\\gnu_gcc\\arm_gcc\\mingw\\bin",
+        "target"    : "hello.elf",
+        "biuld_dir" : ".\\build"
+    },
+    "environment":{
+        "tools"     : "mingw",
+        "AS"        : "arm-none-eabi-gcc",
+        "CC"        : "arm-none-eabi-gcc",
+        "CXX"       : "arm-none-eabi-g++",
+        "AR"        : "arm-none-eabi-ar",
+        "LINK"      : "arm-none-eabi-gcc",
+        "ARFLAGS"   : [
+            "-rc"
+        ],
+        "LINKFLAGS" : [
+            "-mcpu=cortex-m3",
+            "-mthumb",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Wl,--gc-sections,-Map=hello.map,-cref,-u,Reset_Handler",
+            "-T",
+            "link_script\\link.lds"
+        ],
+        "ASFLAGS" : [
+            "-c",
+            "-mcpu=cortex-m3",
+            "-mthumb",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-x",
+            "assembler-with-cpp",
+            "-Wa,-mimplicit-it=thumb",
+            "-gdwarf-2"
+        ],
+        "CFLAGS" : [
+            "-mcpu=cortex-m3",
+            "-mthumb",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Dgcc",
+            "-O0",
+            "-gdwarf-2",
+            "-g"
+        ],
+        "CXXFLAGS" : [
+            "-mcpu=cortex-m3",
+            "-mthumb",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-Dgcc",
+            "-O0",
+            "-gdwarf-2",
+            "-g"
+        ]
+    },
+    "pre_defines" : [
+        "STM32F103xE"
+    ]
+}

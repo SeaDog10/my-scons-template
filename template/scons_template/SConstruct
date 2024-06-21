@@ -1,0 +1,56 @@
+import os
+import json
+from building import *
+
+json_path = r'.\build.json'
+
+if not os.path.exists(json_path):
+    print(json_path + " is not found,please make sure the file is exit")
+    exit(0)
+
+with open(json_path, 'r') as f:
+    config = json.load(f)
+
+TARGET    = config['biuld_flags']['target']
+EXEC_PATH = config['biuld_flags']['exec_path']
+BUILD_DIR = config['biuld_flags']['biuld_dir']
+
+environment = config['environment']
+pre_defines = config['pre_defines']
+
+env = Environment(
+    tools     = [environment['tools']],
+    AS        = environment['AS'],
+    CC        = environment['CC'],
+    CXX       = environment['CXX'],
+    AR        = environment['AR'],
+    LINK      = environment['LINK'],
+    ARFLAGS   = ' '.join(environment['ARFLAGS']),
+    LINKFLAGS = ' '.join(environment['LINKFLAGS']),
+    ASFLAGS   = ' '.join(environment['ASFLAGS']),
+    CFLAGS    = ' '.join(environment['CFLAGS']),
+    CXXFLAGS  = ' '.join(environment['CXXFLAGS'])
+)
+
+env.PrependENVPath('PATH', EXEC_PATH)
+env['ASCOM'] = env['ASPPCOM']
+
+VariantDir(BUILD_DIR, '.', duplicate=0)
+
+rtconfig_path = os.path.join('./', 'rtconfig.h')
+parse_rtconfig_header(rtconfig_path)
+
+Export("env")
+Export("pre_defines")
+
+objs, path = SConscript(os.path.join(BUILD_DIR, 'SConscript'))
+
+env.Append(CPPPATH=path)
+env.Append(CPPDEFINES=pre_defines)
+
+if env['PLATFORM'] == 'win32':
+    win32_spawn = my_spawn()
+    win32_spawn.env = env
+    env['SPAWN'] = win32_spawn.spawn
+
+env.Program(os.path.join(BUILD_DIR, TARGET), objs)

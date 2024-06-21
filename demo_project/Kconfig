@@ -1,0 +1,18 @@
+mainmenu "Project Configuration"
+
+menu "Drivers"
+
+config USEING_RGB_DRIVER
+    bool "Enable LED Drives"
+    default n
+
+endmenu
+
+menu "Examples"
+
+config USEING_REG_EXAMPLE
+    bool "Enable REG Example"
+    select USEING_RGB_DRIVER
+    default n
+
+endmenu

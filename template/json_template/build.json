@@ -1,0 +1,51 @@
+{
+    "biuld_flags":{
+        "exec_path" : "",
+        "target"    : "",
+        "biuld_dir" : ""
+    },
+    "environment":{
+        "tools"     : "",
+        "AS"        : "",
+        "CC"        : "",
+        "CXX"       : "",
+        "AR"        : "",
+        "LINK"      : "",
+        "ARFLAGS"   : [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "LINKFLAGS" : [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "ASFLAGS" : [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "CFLAGS" : [
+            "",
+            "",
+            "",
+            ""
+        ],
+        "CXXFLAGS" : [
+            "",
+            "",
+            "",
+            ""
+        ]
+    },
+    "pre_defines" : [
+        "",
+        "",
+        "",
+        ""
+    ]
+}
