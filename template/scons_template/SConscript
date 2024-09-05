@@ -10,6 +10,9 @@ def GetCurrentDir():
     path = os.path.dirname(fn.abspath)
     return path
 
+def source_remove(src_list, name):
+    src_list.remove(Glob(name)[0])
+
 cwd           = GetCurrentDir()
 list          = os.listdir(cwd)
 objs          = []

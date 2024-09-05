@@ -113,6 +113,9 @@
        name = fn.name
        path = os.path.dirname(fn.abspath)
        return path
+
+   def source_remove(src_list, name):
+       src_list.remove(Glob(name)[0])
    
    cwd           = GetCurrentDir()
    list          = os.listdir(cwd)
@@ -146,15 +149,15 @@
      # User Define
      source += Glob('hello_world.c') #添加当前目录下的 hello_world.c 文件
      source += Glob('*.c') #添加当前目录下所有.c文件，‘*’为通配符
-     source.remove(['hello_world.c']) #从源文件列表删除 hello_world.c 文件
+     source_remove(source, 'hello_world.c') #从源文件列表删除 hello_world.c 文件
      
      source += Glob('hello_world.cpp') #添加当前目录下的 hello_world.cpp 文件
      source += Glob('*.cpp') #添加当前目录下所有.cpp文件，‘*’为通配符
-     source.remove(['hello_world.cpp']) #从源文件列表删除 hello_world.cpp 文件
+     source_remove(source, 'hello_world.cpp') #从源文件列表删除 hello_world.cpp 文件
      
      source += Glob('hello_world.S') #添加当前目录下的 hello_world.S 文件
      source += Glob('*.S') #添加当前目录下所有.S文件，‘*’为通配符
-     source.remove(['hello_world.S']) #从源文件列表删除 hello_world.S 文件
+     source_remove(source, 'hello_world.S') #从源文件列表删除 hello_world.S 文件
      # User Define
      ```
 
@@ -184,7 +187,7 @@
      
      #如果未定义 USER_USING_HELLO_WORLD ，将 hello_world.c 从源文件列表移除
      if GetDepend('USER_USING_HELLO_WORLD') == False:
-         source.remove(['hello_world.c'])
+         source_remove(source, 'hello_world.c')
      # User Define
      ```
 
